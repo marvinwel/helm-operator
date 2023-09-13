@@ -69,7 +69,7 @@ operator-sdk init --plugins=helm \
 vi config/default/kustomization.yaml
 ```
 
- **4. Modify memory limit under **spec.container.resources.limits**
+ **4. Modify memory limit under spec.container.resources.limits**
    - app will crash if more memory is needed - default max memory is 128Mi
 ```
 vi config/d efault/manager_auth_proxy_patch.yaml
