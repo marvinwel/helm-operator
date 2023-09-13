@@ -52,55 +52,55 @@ helm uninstall release-name
 
 # Containerize an Operator with Helm
 
- ** 1. Create a new directory for your Operator project:**
+ **1. Create a new directory for your Operator project:**
 ```
 cd .. && mkdir my-operator && cd my-operator
 ```
 
- ** 2. Initialize a new Operator project:**
+ **2. Initialize a new Operator project:**
 ```
 operator-sdk init --plugins=helm \
       --domain=example.com \
       --helm-chart=../my-chart/
 ```
 
- ** 3. Modify file to specify nameapce**
+ **3. Modify file to specify nameapce**
 ```
 vi config/default/kustomization.yaml
 ```
 
- ** 4. Modify memory limit under **spec.container.resources.limits**
+ **4. Modify memory limit under **spec.container.resources.limits**
    - app will crash if more memory is needed - default max memory is 128Mi
 ```
 vi config/d efault/manager_auth_proxy_patch.yaml
 ```
 
- ** 5. Modify memory limits under spec.containers.args.resources.limits**
+ **5. Modify memory limits under spec.containers.args.resources.limits**
  ```
  vi config/manager/manager.yaml
  ```
  
- ** 6. Containerize Helm and push operator image to registry**
+ **6. Containerize Helm and push operator image to registry**
 ```
 make docker-build docker-push IMG=path/to/operator/image:repo
 ```
 
- ** 7. watch pods for any errors in seprate terminal**
+ **7. watch pods for any errors in seprate terminal**
 ```
 kubectl get pods --watch
 ```
 
- ** 8. Deploy operator to kubernetes**
+ **8. Deploy operator to kubernetes**
 ```
 make deploy IMG=path/to/operator/image:repo
 ```
 
- ** 9. Use the Operator to deploy Helm Chart**
+ **9. Use the Operator to deploy Helm Chart**
 ```
 kubectl apply -f  ./my-helm-chart/my-operator/config/samples/charts_v1alpha1_helm.yaml 
 ```
 
- ** 10. Undeploy app**
+ **10. Undeploy app**
  ```
  make undeploy
  ```
